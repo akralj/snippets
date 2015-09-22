@@ -15,15 +15,22 @@ fetch('http://localhost:3333/ap.json').then(checkStatus).then((response) -> resp
 
 # only works in browser
 xhr = require('xhr')
-getBase64FromHttp = (url, next) ->
-  xhr {
-    uri: url
-    responseType: 'json'
-  }, (err, resp, json) ->
-    console.log err, "xhr"
-    if resp?.statusCode is 200
-      next null, json
+request = (opts, next) ->
+  if opts.responseType is 'json' or opts.responseType is 'blob'
+    xhr {
+      url: opts.url
+      responseType: opts.responseType
+    }, (err, res) ->
+      if err
+        next err
+      else if res?.statusCode isnt 200
+        next error: res.statusCode
+      else
+        next null, res.body
+  else
+    next throw new Error('please specify either json or blob as responseType')
 
-    else next {error: 404}
-
-#getBase64FromHttp "http://localhost:3333/api.json",  (err,res) -> console.log err, res
+url = '/api.jso'
+request {url: url, responseType: 'json'}, (err,res) -> console.log err,res
+url = 'http://a.tile.openstreetmap.org/10/551/357.png'
+request {url: url, responseType: 'blob'}, (err,res) -> console.log err,res
