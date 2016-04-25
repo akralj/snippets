@@ -1,0 +1,65 @@
+// page break in print css
+@media print
+  .list-block
+    li
+      page-break-after: always
+
+
+// center background image
+.card-header-pic .card-header
+  height: 40vw
+  background-size: contain
+  background-repeat: no-repeat
+  background-position: center
+
+// dont know which posterGaller is correct
+.posterGallery
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  background: #333
+  padding: .5vw
+  font-size: 3em
+
+.posterGallery div
+  flex: auto
+  width: 200px
+  margin: .5vw
+  img
+    width: 100%
+    max-width: 200px
+    heigth: auto
+
+// dont know which posterGaller is correct
+.posterGallery
+  display: flex
+  flex-direction: row
+  flex-wrap: wrap
+  align-items: center
+  background: black
+
+.posterGallery div
+  color: white
+  display: flex;
+  flex-basis: 24%
+  min-width: 0
+  align-items(center)
+  justify-content(center)
+  max-height: 10em
+  border: black 4px solid
+  img
+    width: 100%
+
+// end dont know which...
+
+@media screen and (min-width: 767px)
+  .posterGallery > div
+    flex-basis: 16.6667%
+    max-height: 16em
+
+@media screen and (min-width: 1200px)
+  .posterGallery > div
+    flex-basis: 12.5%
+@media screen and (min-width: 1600px)
+  .posterGallery > div
+    flex-basis: 10%
