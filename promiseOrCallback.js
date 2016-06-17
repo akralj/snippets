@@ -1,0 +1,1 @@
+​function foo(cb) { if (cb) { return cb(); } return new Promise(function (resolve, reject) { }); }
