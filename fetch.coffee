@@ -13,7 +13,23 @@ fetch('http://localhost:3333/ap.json').then(checkStatus).then((response) -> resp
 ).catch (error) -> console.log 'request failed', error
 
 
-# only works in browser
+
+# http://stackoverflow.com/questions/39736981/chaining-promises-in-es6-typescript/39737323#39737323
+url1 = "https://api.dioezese-linz.at/events/14_55749"
+url2 = "https://api.dioezese-linz.at/events/10_17667"
+# all or nothing
+Promise.all([
+  fetch(url1).then((res) -> res.json()),
+  fetch(url2).then((res) -> res.json())
+]).then((result) ->
+  console.log result
+   _.pluck result[0].data, "id"
+# catch 5xx errors, json parse errors and propagades them down
+).catch((err) -> console.log err)
+
+
+
+# nice wapper which supports abort. only thing which it does better over fetch
 xhr = require('xhr')
 request = (opts, next) ->
   if opts.responseType is 'json' or opts.responseType is 'blob'
