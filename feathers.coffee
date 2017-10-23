@@ -21,6 +21,14 @@ myHook = (options) =>
     console.log('My custom hook ran');
     Promise.resolve(hook); # A good convention is to always return a promise.
 
+# OR (not sure about the do)
+validatePerson = do (options) ->
+  (hook) ->
+    console.log('My custom hook ran');
+    Promise.resolve(hook) # A good convention is to always return a promise.
+
+
+
 # Set up our before hook
 userService.before({
   all: [] # run hooks for all service methods
