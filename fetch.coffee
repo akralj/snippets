@@ -46,7 +46,7 @@ request = (opts, next) ->
   else
     next throw new Error('please specify either json or blob as responseType')
 
-url = '/api.jso'
+url = '/api.json'
 request {url: url, responseType: 'json'}, (err,res) -> console.log err,res
 url = 'http://a.tile.openstreetmap.org/10/551/357.png'
 request {url: url, responseType: 'blob'}, (err,res) -> console.log err,res
